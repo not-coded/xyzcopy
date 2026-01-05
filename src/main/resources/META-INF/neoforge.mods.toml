@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "*"
+issueTrackerURL = "https://github.com/not-coded/xyzcopy/issues"
+displayURL = "https://modrinth.com/mod/xyzcopy"
+license = "MIT"
+
+[[mods]]
+modId = "xyzcopy"
+version = "${version}"
+displayName = "XYZCopy"
+authors = "NotCoded"
+description = "Adds/replaces hotkeys that copies player location and targeted block location."
+logoFile = "icon.png"
+logoBlur = false
+
+[[dependencies.xyzcopy]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraftVersion}"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.xyzcopy]]
+modId = "cloth_config"
+type = "required"
+versionRange = "[4.17.101,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[mixins]]
+config = "xyzcopy.mixins.json"

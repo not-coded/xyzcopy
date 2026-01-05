@@ -1,0 +1,191 @@
+plugins {
+    id("dev.architectury.loom")
+    id("architectury-plugin")
+    id("me.modmuss50.mod-publish-plugin")
+    id("com.github.johnrengelman.shadow")
+}
+
+val minecraft = stonecutter.current.version
+val loader = loom.platform.get().name.lowercase()
+
+version = "${mod.version}+${mod.prop("version_name")}-$loader"
+group = mod.group
+base {
+    archivesName.set(mod.id)
+}
+
+val isFabric = loader == "fabric"
+val isForge = loader == "forge"
+val isNeoForge = loader == "neoforge"
+
+stonecutter.const("fabric", isFabric)
+stonecutter.const("forge", isForge)
+stonecutter.const("neoforge", isNeoForge)
+
+architectury.common(stonecutter.tree.branches.mapNotNull {
+    if (stonecutter.current.project !in it) null
+    else it.project.prop("loom.platform")
+})
+repositories {
+    maven("https://maven.shedaniel.me/")
+    maven("https://maven.terraformersmc.com/releases/")
+    maven("https://maven.neoforged.net/releases")
+    maven("https://maven.minecraftforge.net")
+
+}
+dependencies {
+    minecraft("com.mojang:minecraft:$minecraft")
+    mappings(loom.officialMojangMappings())
+
+    // TODO: parchment mappings if necessary
+
+    modImplementation("me.shedaniel.cloth:cloth-config-${loader}:${mod.dep("cloth_config_version")}")
+
+    if (isFabric) {
+        modImplementation("net.fabricmc:fabric-loader:${mod.dep("fabric_loader")}")
+        modImplementation("com.terraformersmc:modmenu:${mod.dep("mod_menu_version")}")
+    }
+    if (isForge) {
+        "forge"("net.minecraftforge:forge:${minecraft}-${mod.dep("forge_loader")}")
+    }
+    if (isNeoForge) {
+        "neoForge"("net.neoforged:neoforge:${mod.dep("neoforge_loader")}")
+    }
+}
+
+loom {
+    decompilers {
+        get("vineflower").apply { // Adds names to lambdas - useful for mixins
+            options.put("mark-corresponding-synthetics", "1")
+        }
+    }
+    if (isForge) {
+        forge.mixinConfig("xyzcopy.mixins.json")
+    }
+}
+
+java {
+    withSourcesJar()
+    val javaVersion = mod.dep("java")
+    val java = if (javaVersion == "8") JavaVersion.VERSION_1_8 else if(javaVersion == "17") JavaVersion.VERSION_17 else JavaVersion.VERSION_21
+    targetCompatibility = java
+    sourceCompatibility = java
+}
+
+val shadowBundle: Configuration by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+}
+
+tasks.shadowJar {
+    configurations = listOf(shadowBundle)
+    archiveClassifier = "dev-shadow"
+}
+
+tasks.remapJar {
+    injectAccessWidener = true
+    inputFile.set(tasks.shadowJar.get().archiveFile)
+    archiveClassifier = null
+    dependsOn(tasks.shadowJar)
+}
+
+tasks.jar {
+    archiveClassifier = "dev"
+}
+
+val buildAndCollect = tasks.register<Copy>("buildAndCollect") {
+    group = "versioned"
+    description = "Must run through 'chiseledBuild'"
+    from(tasks.remapJar.get().archiveFile, tasks.remapSourcesJar.get().archiveFile)
+    into(rootProject.layout.buildDirectory.file("libs/${mod.version}/$loader"))
+    dependsOn("build")
+}
+
+if (stonecutter.current.isActive) {
+    rootProject.tasks.register("buildActive") {
+        group = "project"
+        dependsOn(buildAndCollect)
+    }
+
+    rootProject.tasks.register("runActive") {
+        group = "project"
+        dependsOn(tasks.named("runClient"))
+    }
+}
+
+tasks.processResources {
+    var clothConfigSeparator = "_"
+    if(minecraft == "1.16.5") clothConfigSeparator = "-"
+
+    val expandProps = mapOf(
+        "version" to version,
+        "minecraftVersion" to mod.prop("mc_dep"),
+        "javaVersion" to mod.dep("java"),
+        "cloth_config_separator" to clothConfigSeparator
+    )
+
+    if (isFabric) {
+        filesMatching("fabric.mod.json") { expand(expandProps) }
+        exclude("META-INF/mods.toml", "META-INF/neoforge.mods.toml", "pack.mcmeta")
+    }
+
+    if(isForge || isNeoForge) {
+        filesMatching("META-INF/*mods.toml") { expand(expandProps) }
+        exclude("fabric.mod.json")
+    }
+
+    inputs.properties(expandProps)
+
+}
+
+tasks.build {
+    group = "versioned"
+    description = "Must run through 'chiseledBuild'"
+}
+
+publishMods {
+    version.set(project.version.toString())
+    displayName.set("${loader.upperCaseFirst()} | ${mod.prop("version_name")} [v${mod.version}]")
+    type = STABLE
+    file.set(tasks.remapJar.get().archiveFile)
+    val mcVersions = mod.prop("mc_targets").split(",")
+
+    changelog = rootProject.file("CHANGES.md").readText()
+    if(minecraft == "1.16.5" && isForge) changelog = changelog.get() + "\nNOTE: You must disable the early loading screen manually, this can be done by adding \"-Dfml.earlyprogresswindow=false\" to your java arguments or by installing the [No Early loading progress](https://www.curseforge.com/minecraft/mc-mods/no-early-loading-progress) mod."
+
+    modLoaders.add(loader)
+    if(isFabric) modLoaders.add("quilt")
+
+
+    modrinth {
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+
+        projectId = "hxIWsdEF"
+        minecraftVersions.addAll(mcVersions)
+
+        requires("cloth-config")
+        if(isFabric) optional("modmenu")
+    }
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+
+        projectId = "1224888"
+        minecraftVersions.addAll(mcVersions)
+
+        val javaVersion = mod.dep("java")
+        val java = if (javaVersion == "8") JavaVersion.VERSION_1_8 else if(javaVersion == "17") JavaVersion.VERSION_17 else JavaVersion.VERSION_21
+        javaVersions.add(java)
+
+        clientRequired = true
+        serverRequired = false
+
+        changelogType = "markdown"
+
+        requires("cloth-config")
+        if(isFabric) optional("modmenu")
+    }
+
+    //TODO: remove this when actually want to release
+    dryRun = true
+}

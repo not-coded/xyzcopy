@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "xyzcopy",
+  "version": "${version}",
+
+  "name": "XYZ Copy",
+  "description": "Adds/replaces hotkeys that copies player location and targeted block location.",
+  "authors": [
+    "NotCoded"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/xyzcopy",
+    "sources": "https://github.com/not-coded/xyzcopy",
+    "issues": "https://github.com/not-coded/xyzcopy/issues"
+  },
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "net.notcoded.xyzcopy.platforms.fabric.XYZCopyFabric"
+    ],
+    "modmenu": [
+      "net.notcoded.xyzcopy.platforms.fabric.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "xyzcopy.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.20",
+    "cloth-config2": ">=4.17.101",
+    "minecraft": "${minecraftVersion}",
+    "java": ">=${javaVersion}"
+  },
+  "recommends": {
+    "modmenu": "*"
+  }
+}
