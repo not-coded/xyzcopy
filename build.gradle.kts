@@ -151,7 +151,6 @@ publishMods {
     val mcVersions = mod.prop("mc_targets").split(",")
 
     changelog = rootProject.file("CHANGES.md").readText()
-    if(minecraft == "1.16.5" && isForge) changelog = changelog.get() + "\nNOTE: You must disable the early loading screen manually, this can be done by adding \"-Dfml.earlyprogresswindow=false\" to your java arguments or by installing the [No Early loading progress](https://www.curseforge.com/minecraft/mc-mods/no-early-loading-progress) mod."
 
     modLoaders.add(loader)
     if(isFabric) modLoaders.add("quilt")
@@ -160,7 +159,7 @@ publishMods {
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_API_KEY")
 
-        projectId = "hxIWsdEF"
+        projectId = "w4Xqquyv"
         minecraftVersions.addAll(mcVersions)
 
         requires("cloth-config")
@@ -170,7 +169,7 @@ publishMods {
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
 
-        projectId = "1224888"
+        projectId = "1421731"
         minecraftVersions.addAll(mcVersions)
 
         val javaVersion = mod.dep("java")

@@ -2,7 +2,23 @@
   "xyzcopy.option.title": "XYZCopy Options",
   "xyzcopy.option.empty": " ",
 
-  "xyzcopy.option.test": "Test",
-  "xyzcopy.option.test.tooltip": "test 1",
-  "xyzcopy.option.test.tooltip2": "test 2"
+  "xyzcopy.option.replaceDebugKey": "Replace Debug Key",
+  "xyzcopy.option.replaceDebugKey.tooltip": "Makes the F3 + C debug key combination use the Location Template.",
+
+  "xyzcopy.option.locationTemplate": "Location Template",
+  "xyzcopy.option.locationTemplate.tooltip": "The template used when copying the player's location.",
+  "xyzcopy.option.locationTemplate.tooltip2": "Available placeholders: %x, %y, %z, %yaw, %pitch, %\\dimension",
+
+  "xyzcopy.option.decimalPlaces": "Decimal Places",
+  "xyzcopy.option.decimalPlaces.tooltip": "Number of decimal places to use for the location.",
+
+  "xyzcopy.option.copyMessageClipboard": "Copy Message (Clipboard)",
+  "xyzcopy.option.copyMessageClipboard.tooltip": "The message shown when the location is copied to the clipboard.",
+
+  "xyzcopy.option.sendInChatInsteadOfCopyingToClipboard": "Send in Chat Instead of Copying to Clipboard",
+  "xyzcopy.option.sendInChatInsteadOfCopyingToClipboard.tooltip": "Send the location in chat instead of copying to the clipboard.",
+
+  "xyzcopy.option.copyMessage": "Copy Message",
+  "xyzcopy.option.copyMessage.tooltip": "The message shown when the location is shown in chat only.",
+  "xyzcopy.option.copyMessage.tooltip2": "→ Look at Send in Chat Instead of Copying to Clipboard."
 }

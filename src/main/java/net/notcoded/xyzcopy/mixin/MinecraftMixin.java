@@ -1,15 +1,20 @@
 package net.notcoded.xyzcopy.mixin;
 
 import net.minecraft.client.Minecraft;
+import net.notcoded.xyzcopy.XYZCopy;
+import net.notcoded.xyzcopy.platforms.ModPlatform;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if neoforge {
 /*import net.notcoded.xyzcopy.platforms.neoforge.XYZCopyNeoForge;
 *///?}
 
 //? if forge {
-//import net.notcoded.xyzcopy.platforms.forge.XYZCopyForge;
-//?}
+/*import net.notcoded.xyzcopy.platforms.forge.XYZCopyForge;
+*///?}
 
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
@@ -27,7 +32,7 @@ public class MinecraftMixin {
         /^platform = new XYZCopyForge.ForgePlatform();
         ^///?}
 
-        WayFix.init(platform);
+        XYZCopy.init(platform);
     }
     *///?}
 }

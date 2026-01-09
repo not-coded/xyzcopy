@@ -22,7 +22,7 @@ stonecutter {
             for (version in versions) vers("$version-$loader", version)
         }
 
-        mc("fabric", "1.16.5")
+        mc("fabric", "1.16.5", "1.17.1")
         mc("forge", "1.16.5", "1.17.1", "1.18.2", "1.19")
         mc("neoforge", "1.20.4", "1.20.6")
 
@@ -31,4 +31,4 @@ stonecutter {
     create(rootProject)
 }
 
-rootProject.name = "XYZ Copy"
+rootProject.name = "xyzcopy"

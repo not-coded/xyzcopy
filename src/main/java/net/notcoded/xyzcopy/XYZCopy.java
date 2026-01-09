@@ -20,4 +20,5 @@ public class XYZCopy {
 
         LOGGER.info("Hello World on {}!", platform.getModLoader());
     }
+
 }

@@ -4,6 +4,7 @@
   "package": "net.notcoded.xyzcopy.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "KeyboardHandlerMixin",
     "MinecraftMixin"
   ],
   "injectors": {

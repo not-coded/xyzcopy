@@ -9,10 +9,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.notcoded.xyzcopy.XYZCopy;
-
-//? if <1.19 {
-import net.minecraft.network.chat.TranslatableComponent;
-//?}
+import net.notcoded.xyzcopy.util.VersionUtil;
 
 @Config(name = "xyzcopy")
 public class ModClothConfig extends ModConfig implements ConfigData {
@@ -30,20 +27,46 @@ public class ModClothConfig extends ModConfig implements ConfigData {
         ConfigCategory category = builder.getOrCreateCategory(getText("title"));
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        category.addEntry(entryBuilder.startBooleanToggle(getText("test"), config.test)
+        category.addEntry(entryBuilder.startBooleanToggle(getText("replaceDebugKey"), config.replaceDebugKey)
                 .setDefaultValue(true)
-                .setTooltip(getText("test.tooltip"), getText("test.tooltip2"))
-                .setSaveConsumer(value -> config.test = value)
+                .setTooltip(getText("replaceDebugKey.tooltip"))
+                .setSaveConsumer(value -> config.replaceDebugKey = value)
+                .build());
+
+        category.addEntry(entryBuilder.startStrField(getText("locationTemplate"), config.locationTemplate)
+                .setDefaultValue("%x %y %z in %dimension")
+                .setTooltip(getText("locationTemplate.tooltip"), getText("locationTemplate.tooltip2"))
+                .setSaveConsumer(value -> config.locationTemplate = value)
+                .build());
+
+        category.addEntry(entryBuilder.startIntSlider(getText("decimalPlaces"), config.decimalPlaces, 0, 17)
+                .setDefaultValue(0)
+                .setTooltip(getText("decimalPlaces.tooltip"))
+                .setSaveConsumer(value -> config.decimalPlaces = value)
+                .build());
+
+        category.addEntry(entryBuilder.startBooleanToggle(getText("sendInChatInsteadOfCopyingToClipboard"), config.sendInChatInsteadOfCopyingToClipboard)
+                .setDefaultValue(false)
+                .setTooltip(getText("sendInChatInsteadOfCopyingToClipboard.tooltip"))
+                .setSaveConsumer(value -> config.sendInChatInsteadOfCopyingToClipboard = value)
+                .build());
+
+        category.addEntry(entryBuilder.startStrField(getText("copyMessage"), config.copyMessage)
+                .setDefaultValue("Copied location")
+                .setTooltip(getText("copyMessage.tooltip"))
+                .setSaveConsumer(value -> config.copyMessage = value)
+                .build());
+
+        category.addEntry(entryBuilder.startStrField(getText("copyMessageClipboard"), config.copyMessageClipboard)
+                .setDefaultValue("debug.copy_location.message")
+                .setTooltip(getText("copyMessageClipboard.tooltip"))
+                .setSaveConsumer(value -> config.copyMessageClipboard = value)
                 .build());
 
         return builder.build();
     }
 
     private static Component getText(String key) {
-        //? if >=1.19 {
-        /*return Component.translatable("xyzcopy.option." + key);
-         *///?} elif <1.19 {
-        return new TranslatableComponent("xyzcopy.option." + key);
-        //?}
+        return VersionUtil.getTranslatableText("xyzcopy.option." + key);
     }
 }
