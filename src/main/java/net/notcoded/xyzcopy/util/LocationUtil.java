@@ -102,10 +102,10 @@ public class LocationUtil {
                 );
 
         if(sendInChat) {
-            client.gui.getChat().addMessage(VersionUtil.getTranslatableText(config.block.copyMessage));
+            client.gui.getChat().addMessage(VersionUtil.getTranslatableText(config.block.copyMessage.replaceAll("&", "§")));
             client.gui.getChat().addMessage(VersionUtil.getTranslatableText(locationTemplate));
         } else {
-            client.gui.getChat().addMessage(VersionUtil.getTranslatableText(config.block.copyMessageClipboard));
+            client.gui.getChat().addMessage(VersionUtil.getTranslatableText(config.block.copyMessageClipboard.replaceAll("&", "§")));
             client.keyboardHandler.setClipboard(locationTemplate);
         }
     }
