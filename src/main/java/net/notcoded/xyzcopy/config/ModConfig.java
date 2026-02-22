@@ -22,7 +22,7 @@ public class ModConfig {
         public int decimalPlaces = 0;
 
         @Comment("The message shown when the location is copied to the clipboard.\nYou can use Chat Colors with & codes (e.g. &a for green, &c for red)")
-        public String copyMessageClipboard = "debug.copy_location.message"; // Vanilla translation key
+        public String copyMessageClipboard = "Copied location to clipboard";
 
         @Comment("Send the location in chat instead of copying to the clipboard.")
         public boolean sendInChatInsteadOfCopyingToClipboard = false;
