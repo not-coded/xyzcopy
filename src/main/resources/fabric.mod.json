@@ -37,6 +37,7 @@
     "java": ">=${javaVersion}"
   },
   "recommends": {
-    "modmenu": "*"
+    "modmenu": "*",
+    "fabric-key-binding-api-v1": "*"
   }
 }

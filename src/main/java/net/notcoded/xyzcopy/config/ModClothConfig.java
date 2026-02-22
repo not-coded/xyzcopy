@@ -24,43 +24,91 @@ public class ModClothConfig extends ModConfig implements ConfigData {
 
         builder.setSavingRunnable(() -> AutoConfig.getConfigHolder(ModClothConfig.class).save());
 
-        ConfigCategory category = builder.getOrCreateCategory(getText("title"));
+
+        ConfigCategory locationCategory = builder.getOrCreateCategory(getText("category.location"));
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        category.addEntry(entryBuilder.startBooleanToggle(getText("replaceDebugKey"), config.replaceDebugKey)
+        locationCategory.addEntry(entryBuilder.startBooleanToggle(getText("replaceDebugKey"), config.location.replaceDebugKey)
                 .setDefaultValue(true)
-                .setTooltip(getText("replaceDebugKey.tooltip"))
-                .setSaveConsumer(value -> config.replaceDebugKey = value)
+                .setTooltip(getText("replaceDebugKey.tooltip"), getText("replaceDebugKey.tooltip2"))
+                .setSaveConsumer(value -> config.location.replaceDebugKey = value)
                 .build());
 
-        category.addEntry(entryBuilder.startStrField(getText("locationTemplate"), config.locationTemplate)
+        locationCategory.addEntry(entryBuilder.startBooleanToggle(getText("useKeybindWithF3"), config.location.useKeybindWithF3)
+                .setDefaultValue(false)
+                .setTooltip(getText("useKeybindWithF3.tooltip"), getText("useKeybindWithF3.tooltip2"))
+                .setSaveConsumer(value -> config.location.useKeybindWithF3 = value)
+                .build());
+
+        locationCategory.addEntry(entryBuilder.startStrField(getText("locationTemplate"), config.location.locationTemplate)
                 .setDefaultValue("%x %y %z in %dimension")
                 .setTooltip(getText("locationTemplate.tooltip"), getText("locationTemplate.tooltip2"))
-                .setSaveConsumer(value -> config.locationTemplate = value)
+                .setSaveConsumer(value -> config.location.locationTemplate = value)
                 .build());
 
-        category.addEntry(entryBuilder.startIntSlider(getText("decimalPlaces"), config.decimalPlaces, 0, 17)
+        locationCategory.addEntry(entryBuilder.startIntSlider(getText("decimalPlaces"), config.location.decimalPlaces, 0, 17)
                 .setDefaultValue(0)
                 .setTooltip(getText("decimalPlaces.tooltip"))
-                .setSaveConsumer(value -> config.decimalPlaces = value)
+                .setSaveConsumer(value -> config.location.decimalPlaces = value)
                 .build());
 
-        category.addEntry(entryBuilder.startBooleanToggle(getText("sendInChatInsteadOfCopyingToClipboard"), config.sendInChatInsteadOfCopyingToClipboard)
+        locationCategory.addEntry(entryBuilder.startBooleanToggle(getText("sendInChatInsteadOfCopyingToClipboard"), config.location.sendInChatInsteadOfCopyingToClipboard)
                 .setDefaultValue(false)
                 .setTooltip(getText("sendInChatInsteadOfCopyingToClipboard.tooltip"))
-                .setSaveConsumer(value -> config.sendInChatInsteadOfCopyingToClipboard = value)
+                .setSaveConsumer(value -> config.location.sendInChatInsteadOfCopyingToClipboard = value)
                 .build());
 
-        category.addEntry(entryBuilder.startStrField(getText("copyMessage"), config.copyMessage)
+        locationCategory.addEntry(entryBuilder.startStrField(getText("copyMessage"), config.location.copyMessage)
                 .setDefaultValue("Copied location")
-                .setTooltip(getText("copyMessage.tooltip"))
-                .setSaveConsumer(value -> config.copyMessage = value)
+                .setTooltip(getText("copyMessage.tooltip"), getText("copyMessage.tooltip2"), getText("copyMessage.tooltip3"))
+                .setSaveConsumer(value -> config.location.copyMessage = value)
                 .build());
 
-        category.addEntry(entryBuilder.startStrField(getText("copyMessageClipboard"), config.copyMessageClipboard)
+        locationCategory.addEntry(entryBuilder.startStrField(getText("copyMessageClipboard"), config.location.copyMessageClipboard)
                 .setDefaultValue("debug.copy_location.message")
-                .setTooltip(getText("copyMessageClipboard.tooltip"))
-                .setSaveConsumer(value -> config.copyMessageClipboard = value)
+                .setTooltip(getText("copyMessageClipboard.tooltip"), getText("copyMessageClipboard.tooltip2"))
+                .setSaveConsumer(value -> config.location.copyMessageClipboard = value)
+                .build());
+
+
+
+
+        ConfigCategory blockCategory = builder.getOrCreateCategory(getText("category.block"));
+
+        blockCategory.addEntry(entryBuilder.startBooleanToggle(getText("useKeybindWithF3"), config.block.useKeybindWithF3)
+                .setDefaultValue(false)
+                .setTooltip(getText("useKeybindWithF3.tooltip"), getText("useKeybindWithF3.tooltip2"))
+                .setSaveConsumer(value -> config.block.useKeybindWithF3 = value)
+                .build());
+
+        blockCategory.addEntry(entryBuilder.startStrField(getText("block.locationTemplate"), config.block.locationTemplate)
+                .setDefaultValue("%block at %x %y %z")
+                .setTooltip(getText("block.locationTemplate.tooltip"), getText("block.locationTemplate.tooltip2"))
+                .setSaveConsumer(value -> config.block.locationTemplate = value)
+                .build());
+
+        blockCategory.addEntry(entryBuilder.startBooleanToggle(getText("block.includeFluids"), config.block.includeFluids)
+                .setDefaultValue(false)
+                .setTooltip(getText("block.includeFluids.tooltip"))
+                .setSaveConsumer(value -> config.block.includeFluids = value)
+                .build());
+
+        blockCategory.addEntry(entryBuilder.startBooleanToggle(getText("block.sendInChatInsteadOfCopyingToClipboard"), config.block.sendInChatInsteadOfCopyingToClipboard)
+                .setDefaultValue(false)
+                .setTooltip(getText("block.sendInChatInsteadOfCopyingToClipboard.tooltip"))
+                .setSaveConsumer(value -> config.block.sendInChatInsteadOfCopyingToClipboard = value)
+                .build());
+
+        blockCategory.addEntry(entryBuilder.startStrField(getText("block.copyMessage"), config.block.copyMessage)
+                .setDefaultValue("Copied location")
+                .setTooltip(getText("block.copyMessage.tooltip"), getText("block.copyMessage.tooltip2"), getText("block.copyMessage.tooltip3"))
+                .setSaveConsumer(value -> config.block.copyMessage = value)
+                .build());
+
+        blockCategory.addEntry(entryBuilder.startStrField(getText("block.copyMessageClipboard"), config.block.copyMessageClipboard)
+                .setDefaultValue("debug.copy_location.message")
+                .setTooltip(getText("block.copyMessageClipboard.tooltip"), getText("block.copyMessageClipboard.tooltip2"))
+                .setSaveConsumer(value -> config.block.copyMessageClipboard = value)
                 .build());
 
         return builder.build();

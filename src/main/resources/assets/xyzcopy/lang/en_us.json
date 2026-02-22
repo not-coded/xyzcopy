@@ -2,23 +2,57 @@
   "xyzcopy.option.title": "XYZCopy Options",
   "xyzcopy.option.empty": " ",
 
+  "key.category.xyzcopy.keybind": "XYZCopy",
+  "xyzcopy.keybind.copy_location": "Copy Player Location",
+  "xyzcopy.keybind.copy_block": "Copy Looking at Block Location",
+  "xyzcopy.keybind.open_config": "Open XYZCopy Config",
+
+  "xyzcopy.option.category.location": "Player Location",
+  "xyzcopy.option.category.block": "Looking at Block",
+
   "xyzcopy.option.replaceDebugKey": "Replace Debug Key",
   "xyzcopy.option.replaceDebugKey.tooltip": "Makes the F3 + C debug key combination use the Location Template.",
+  "xyzcopy.option.replaceDebugKey.tooltip2": "The Mod Keybind will still work as normal.",
+
+  "xyzcopy.option.useKeybindWithF3": "Use Keybind with F3",
+  "xyzcopy.option.useKeybindWithF3.tooltip": "The Keybind will only work when F3 is also held down. (e.g. X → F3 + X)",
+  "xyzcopy.option.useKeybindWithF3.tooltip2": "[!] Beware that this overrides any vanilla debug key combinations using the same key.",
 
   "xyzcopy.option.locationTemplate": "Location Template",
   "xyzcopy.option.locationTemplate.tooltip": "The template used when copying the player's location.",
-  "xyzcopy.option.locationTemplate.tooltip2": "Available placeholders: %x, %y, %z, %yaw, %pitch, %\\dimension",
+  "xyzcopy.option.locationTemplate.tooltip2": "Available placeholders: %x, %y, %z, %yaw, %pitch, %§rdimension",
 
   "xyzcopy.option.decimalPlaces": "Decimal Places",
   "xyzcopy.option.decimalPlaces.tooltip": "Number of decimal places to use for the location.",
 
   "xyzcopy.option.copyMessageClipboard": "Copy Message (Clipboard)",
   "xyzcopy.option.copyMessageClipboard.tooltip": "The message shown when the location is copied to the clipboard.",
+  "xyzcopy.option.copyMessageClipboard.tooltip2": "You can use Chat Colors with & codes (e.g. &a for green, &c for red)",
 
   "xyzcopy.option.sendInChatInsteadOfCopyingToClipboard": "Send in Chat Instead of Copying to Clipboard",
   "xyzcopy.option.sendInChatInsteadOfCopyingToClipboard.tooltip": "Send the location in chat instead of copying to the clipboard.",
 
   "xyzcopy.option.copyMessage": "Copy Message",
   "xyzcopy.option.copyMessage.tooltip": "The message shown when the location is shown in chat only.",
-  "xyzcopy.option.copyMessage.tooltip2": "→ Look at Send in Chat Instead of Copying to Clipboard."
+  "xyzcopy.option.copyMessage.tooltip2": "→ Look at Send in Chat Instead of Copying to Clipboard.",
+  "xyzcopy.option.copyMessage.tooltip3": "You can use Chat Colors with & codes (e.g. &a for green, &c for red)",
+
+  "xyzcopy.option.block.locationTemplate": "Block Location Template",
+  "xyzcopy.option.block.locationTemplate.tooltip": "The template used when copying the block location.",
+  "xyzcopy.option.block.locationTemplate.tooltip2": "Available placeholders: %x, %y, %z, %block, %§rdimension)",
+
+  "xyzcopy.option.block.includeFluids": "Include Fluids",
+  "xyzcopy.option.block.includeFluids.tooltip": "If fluids should be included when copying the block location.",
+
+  "xyzcopy.option.block.copyMessageClipboard": "Block Copy Message (Clipboard)",
+  "xyzcopy.option.block.copyMessageClipboard.tooltip": "The message shown when the block location is copied to the clipboard.",
+  "xyzcopy.option.block.copyMessageClipboard.tooltip2": "You can use Chat Colors with & codes (e.g. &a for green, &c for red)",
+
+  "xyzcopy.option.block.sendInChatInsteadOfCopyingToClipboard": "Send Block Location in Chat Instead of Copying to Clipboard",
+  "xyzcopy.option.block.sendInChatInsteadOfCopyingToClipboard.tooltip": "Send the block location in chat instead of copying to the clipboard.",
+
+  "xyzcopy.option.block.copyMessage": "Block Copy Message",
+  "xyzcopy.option.block.copyMessage.tooltip": "The message shown when the block location is shown in chat only.",
+  "xyzcopy.option.block.copyMessage.tooltip2": "→ Look at Send Block Location in Chat Instead of Copying to Clipboard.",
+  "xyzcopy.option.block.copyMessage.tooltip3": "You can use Chat Colors with & codes (e.g. &a for green, &c for red)"
 }

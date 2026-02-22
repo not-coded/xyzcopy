@@ -2,37 +2,32 @@ package net.notcoded.xyzcopy.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.notcoded.xyzcopy.XYZCopy;
-import net.notcoded.xyzcopy.platforms.ModPlatform;
+import net.notcoded.xyzcopy.config.ModClothConfig;
+import net.notcoded.xyzcopy.config.ModConfig;
+import net.notcoded.xyzcopy.util.LocationUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-//? if neoforge {
-/*import net.notcoded.xyzcopy.platforms.neoforge.XYZCopyNeoForge;
-*///?}
-
-//? if forge {
-/*import net.notcoded.xyzcopy.platforms.forge.XYZCopyForge;
-*///?}
-
 @Mixin(Minecraft.class)
 public class MinecraftMixin {
 
-    //? if forge || neoforge {
-    /*@Inject(method = "<clinit>", at = @At("HEAD"))
-    private static void initMod(CallbackInfo ci) {
-        ModPlatform platform;
+    @Inject(method = "tick()V", at = @At("TAIL"))
+    private void tick(CallbackInfo ci) {
+        ModConfig config = XYZCopy.config;
+        if(config == null) return;
 
-        //? if neoforge {
-        /^platform = new XYZCopyNeoForge.NeoForgePlatform();
-        ^///?}
+        while(XYZCopy.copyBlockKeybind.consumeClick() && !config.block.useKeybindWithF3) {
+            LocationUtil.copyBlockLocation();
+        }
 
-        //? if forge {
-        /^platform = new XYZCopyForge.ForgePlatform();
-        ^///?}
+        while(XYZCopy.copyLocationKeybind.consumeClick() && !config.location.useKeybindWithF3) {
+            LocationUtil.copyLocation();
+        }
 
-        XYZCopy.init(platform);
+        while(XYZCopy.openConfigKeybind.consumeClick()) {
+            Minecraft.getInstance().setScreen(ModClothConfig.buildScreen(Minecraft.getInstance().screen));
+        }
     }
-    *///?}
 }

@@ -37,8 +37,6 @@ dependencies {
     minecraft("com.mojang:minecraft:$minecraft")
     mappings(loom.officialMojangMappings())
 
-    // TODO: parchment mappings if necessary
-
     modImplementation("me.shedaniel.cloth:cloth-config-${loader}:${mod.dep("cloth_config_version")}")
 
     if (isFabric) {
@@ -59,9 +57,18 @@ loom {
             options.put("mark-corresponding-synthetics", "1")
         }
     }
+
+    accessWidenerPath = rootProject.file("src/main/resources/xyzcopy.accesswidener")
+
     if (isForge) {
-        forge.mixinConfig("xyzcopy.mixins.json")
+        forge {
+            mixinConfig("xyzcopy.mixins.json")
+
+            convertAccessWideners = true
+            extraAccessWideners.add(accessWidenerPath.get().asFile.name)
+        }
     }
+
 }
 
 java {
@@ -163,7 +170,10 @@ publishMods {
         minecraftVersions.addAll(mcVersions)
 
         requires("cloth-config")
-        if(isFabric) optional("modmenu")
+        if(isFabric) {
+            optional("fabric-api")
+            optional("modmenu")
+        }
     }
 
     curseforge {
