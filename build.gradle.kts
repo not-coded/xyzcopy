@@ -192,7 +192,10 @@ publishMods {
         changelogType = "markdown"
 
         requires("cloth-config")
-        if(isFabric) optional("modmenu")
+        if(isFabric) {
+            optional("fabric-api")
+            optional("modmenu")
+        }
     }
 
     //TODO: remove this when actually want to release

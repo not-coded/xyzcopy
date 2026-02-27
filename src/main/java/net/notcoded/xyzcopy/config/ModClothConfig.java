@@ -41,7 +41,7 @@ public class ModClothConfig extends ModConfig implements ConfigData {
                 .build());
 
         locationCategory.addEntry(entryBuilder.startStrField(getText("locationTemplate"), config.location.locationTemplate)
-                .setDefaultValue("%x %y %z in %dimension")
+                .setDefaultValue("%x %y %z")
                 .setTooltip(getText("locationTemplate.tooltip"), getText("locationTemplate.tooltip2"))
                 .setSaveConsumer(value -> config.location.locationTemplate = value)
                 .build());
@@ -65,7 +65,7 @@ public class ModClothConfig extends ModConfig implements ConfigData {
                 .build());
 
         locationCategory.addEntry(entryBuilder.startStrField(getText("copyMessageClipboard"), config.location.copyMessageClipboard)
-                .setDefaultValue("debug.copy_location.message")
+                .setDefaultValue("Copied location to clipboard")
                 .setTooltip(getText("copyMessageClipboard.tooltip"), getText("copyMessageClipboard.tooltip2"))
                 .setSaveConsumer(value -> config.location.copyMessageClipboard = value)
                 .build());
@@ -100,13 +100,13 @@ public class ModClothConfig extends ModConfig implements ConfigData {
                 .build());
 
         blockCategory.addEntry(entryBuilder.startStrField(getText("block.copyMessage"), config.block.copyMessage)
-                .setDefaultValue("Copied location")
+                .setDefaultValue("Copied block location")
                 .setTooltip(getText("block.copyMessage.tooltip"), getText("block.copyMessage.tooltip2"), getText("block.copyMessage.tooltip3"))
                 .setSaveConsumer(value -> config.block.copyMessage = value)
                 .build());
 
         blockCategory.addEntry(entryBuilder.startStrField(getText("block.copyMessageClipboard"), config.block.copyMessageClipboard)
-                .setDefaultValue("debug.copy_location.message")
+                .setDefaultValue("Copied block location to clipboard")
                 .setTooltip(getText("block.copyMessageClipboard.tooltip"), getText("block.copyMessageClipboard.tooltip2"))
                 .setSaveConsumer(value -> config.block.copyMessageClipboard = value)
                 .build());

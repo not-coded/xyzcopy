@@ -39,7 +39,7 @@
 
   "xyzcopy.option.block.locationTemplate": "Block Location Template",
   "xyzcopy.option.block.locationTemplate.tooltip": "The template used when copying the block location.",
-  "xyzcopy.option.block.locationTemplate.tooltip2": "Available placeholders: %x, %y, %z, %block, %§rdimension)",
+  "xyzcopy.option.block.locationTemplate.tooltip2": "Available placeholders: %x, %y, %z, %block, %§rdimension",
 
   "xyzcopy.option.block.includeFluids": "Include Fluids",
   "xyzcopy.option.block.includeFluids.tooltip": "If fluids should be included when copying the block location.",
