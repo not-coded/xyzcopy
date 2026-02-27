@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/not-coded/xyzcopy/refs/heads/main/src/main/resources/icon.png" width=128 height=128 alt="XYZ Copy Logo"/>
+<img src="https://raw.githubusercontent.com/not-coded/xyzcopy/refs/heads/main/src/main/resources/icon.png" width=192 height=192 alt="XYZ Copy Logo"/>
 <br>
 
 # XYZ Copy
@@ -11,12 +11,20 @@ Adds/replaces hotkeys that copies player location and targeted block location.
 </div>
 
 ## Features
-- customizable location templates with placeholders (%x, %y, %z, %yaw, %pitch, %dimension)
-- adjustable decimal precision for coordinates
-- replaces f3+c debug key with custom location copy
-- option to send location in chat instead of clipboard
-- configurable copy messages
-- supports all minecraft versions from 1.16.5+
+- Player Location Copy
+  - Copy the current position with **%x**, **%y**, **%z**, **%yaw**, **%pitch** and **%dimension** placeholders
+- Block Location Copy
+  - Copy the location of the block you're looking at with **%x**, **%y**, **%z**, **%block** and **%dimension** placeholders
+
+- Keybinds
+  - Replace the **F3 + C** debug key with the custom player location copy
+  - A keybind for copying the location of the block you're looking at and a keybind for opening the config screen (with support for the F3 modifier)
+
+- Output
+  - Copy to clipboard or send locations directly in chat
+  - Customizable messages for clipboard and chat 
+  - Chat Color support (&a for green, &c for red, etc.)
+
 
 ## Building
 - Clone the repository
